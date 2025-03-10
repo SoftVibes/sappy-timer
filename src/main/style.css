@@ -1,0 +1,332 @@
+@import url('https://fonts.googleapis.com/css2?family=Pixelify+Sans:wght@400..700&display=swap');
+
+* {
+    border: 0;
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+    -webkit-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+    outline: none;
+}
+
+:root {
+    --violet: rgb(196, 127, 252);
+    --pink: rgb(255, 162, 218);
+    --lightviolet: rgb(216, 147, 255);
+    --lightpink: rgb(255, 174, 236);
+    --darkviolet: rgb(176, 107, 232);
+    --darkpink: rgb(235, 151, 201);
+}
+
+#container {
+    position: fixed;
+    width: 100vw;
+    height: 100vh;
+    border-radius: 10px;
+    background-color: var(--violet);
+    color: white;
+    -webkit-app-region: drag;
+}
+
+#container * {
+    -webkit-app-region: no-drag;
+}
+
+#win-close {
+    position: fixed;
+    width: 30px;
+    height: 30px;
+    background-color: rgba(255, 239, 251, 0.15);
+    cursor: pointer;
+    outline: none;
+    margin-left: calc(100vw - 55px);
+    margin-right: 0;
+    margin-top: 7.5px;
+}
+
+#win-minimise {
+    position: fixed;
+    width: 30px;
+    height: 30px;
+    background-color: rgba(255, 239, 251, 0.15);
+    cursor: pointer;
+    outline: none;
+    margin-left: calc(100vw - 105px);
+    margin-right: 0;
+    margin-top: 8px;
+}
+
+#body {
+    position: fixed;
+    width: calc(100vw - 30px);
+    height: calc(100vh - 55px);
+    margin: 45px 15px 15px 15px;
+    border-radius: 15px;
+    background-color: var(--pink);
+    color: white;
+    -webkit-app-region: no-drag;
+}
+
+#cat-img {
+    width: 256px;
+    height: 256px;
+    position: absolute;
+    margin-top: 0;
+    margin-bottom: 0;
+    margin-left: 0;
+    margin-right: 50px;
+}
+
+#text-bubble {
+    width: 450px; 
+    height: 80px; 
+    background: white;
+    position: absolute;
+    margin-left: 300px;
+    margin-top: 30px;
+    -moz-border-radius: 10px; 
+    -webkit-border-radius: 10px; 
+    border-radius: 10px;
+    display: none;
+}
+
+#text-bubble:before {
+    content:"";
+    position: absolute;
+    width: 0;
+    height: 0;
+    border-top: 13px solid transparent;
+    border-right: 26px solid white;
+    border-bottom: 13px solid transparent;
+    margin: 13px 0 0 -25px;
+}
+
+#text-bubble-text {
+    color: black;
+    font-size: 1.3em;
+    font-weight: 700;
+    font-family: 'Pixelify Sans', serif;
+    margin: 10px 0 0 10px;
+}
+
+#timer-box {
+    position: fixed;
+    width: 450px;
+    height: 100px;
+    background-color: var(--darkviolet);
+    margin-left: calc(286px);
+    margin-top: 156px;
+    border-radius: 5px;
+    display: grid;
+    grid-template-rows: 1fr;
+    grid-template-columns: 3fr 3fr 3fr 1fr;
+    gap: 4px;
+    padding: 4px;
+}
+
+#timer-hours {
+    grid-row: 1 / 2;
+    grid-column: 1 / 2;
+}
+
+#timer-minutes {
+    grid-row: 1 / 2;
+    grid-column: 2 / 3;
+}
+
+#timer-seconds {
+    grid-row: 1 / 2;
+    grid-column: 3 / 4;
+}
+
+.timer-counter {
+    background: transparent;
+    display: grid;
+    grid-template-rows: 1fr 1fr;
+    grid-template-columns: 8fr 3fr;
+    gap: 4px;
+    padding: 2px;
+}
+
+.counter-input-text {
+    margin: 0;
+    grid-row: 1 / 3;
+    grid-column: 1 / 2;
+    width: 100%;
+    outline: none;
+    font-size: 3em;
+    font-weight: 500;
+    text-align: center;
+    background-color: var(--pink);
+    color: var(--darkviolet);
+}
+
+.counter-input-text::-webkit-outer-spin-button,
+.counter-input-text::-webkit-inner-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+}
+
+.counter-input-text[type=number]{
+    -moz-appearance: textfield;
+}
+
+.counter-input-button {
+    background-color: var(--pink);
+    margin: 0;
+    cursor: pointer;
+    font-size: 2em;
+    font-weight: 700;
+    color: var(--darkviolet)
+}
+
+.counter-input-button:hover {
+    background-color: var(--lightpink);
+    color: var(--violet);
+}
+
+.counter-input-button.inc {
+    grid-row: 1 / 2;
+    grid-column: 2 / 3;
+}
+
+.counter-input-button.dec {
+    grid-row: 2 / 3;
+    grid-column: 2 / 3;
+}
+
+#control-box {
+    background: transparent;
+    display: grid;
+    grid-template-rows: 1fr 1fr;
+    grid-template-columns: 1fr;
+    gap: 4px;
+    grid-row: 1 / 2;
+    grid-column: 4 / 5;
+    padding: 2px;
+}
+
+.control {
+    background-color: var(--pink);
+    margin: 0;
+    cursor: pointer;
+    font-size: 1.7em;
+    color: var(--darkviolet);
+}
+
+.control:hover {
+    background-color: var(--lightpink);
+    color: var(--violet);
+}
+
+#control-startstop {
+    grid-row: 1 / 2;
+    grid-column: 1 / 2;
+}
+
+#control-reset {
+    grid-row: 2 / 3;
+    grid-column: 1 / 2;
+}
+
+#tasks {
+    position: absolute;
+    width: 750px;
+    height: 260px;
+    margin-top: 320px;
+    margin-left: 25px;
+    background-color: var(--darkpink);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 10px;
+    border: 5px solid var(--darkviolet);
+    border-radius: 5px;
+    gap: 10px;
+    overflow-y: scroll;
+}
+
+#add-task {
+    width: 95%;
+    min-height: 70px;
+    cursor: pointer;
+    background-color: var(--pink);
+    border: 5px solid var(--darkviolet);
+    border-radius: 5px;
+    font-size: 30px;
+    color: white;
+    font-weight: 700;
+    font-family: 'Pixelify Sans', serif;
+}
+
+#add-task:hover {
+    background-color: var(--lightpink);
+    border-color: var(--violet);
+}
+
+.task {
+    width: 95%;
+    min-height: 70px;
+    background-color: var(--pink);
+    border: 5px solid var(--darkviolet);
+    border-radius: 5px;
+    display: grid;
+    grid-template-rows: 1fr;
+    grid-template-columns: 10fr 1fr 1fr 1fr;
+    gap: 20px;
+    padding: 10px;
+}
+
+.task-name {
+    width: 100%;
+    min-width: 100%;
+    max-width: 100%;
+    height: 100%;
+    background-color: var(--pink);
+    font-size: 25px;
+    font-family: 'Pixelify Sans', serif;
+    font-weight: 700;
+    grid-row: 1 / 2;
+    grid-column: 1 / 2;
+    color: white;
+    padding-left: 10px;
+}
+
+.task-name:focus {
+    background-color: var(--lightpink);
+}
+
+.task-name::placeholder {
+    color: rgb(255, 255, 255);
+}
+
+.task button {
+    width: 100%;
+    height: 100%;
+    background-color: var(--pink);
+    outline: none;
+    cursor: pointer;
+    font-size: 1.25em;
+}
+
+.task button:hover {
+    background-color: var(--lightpink);
+    font-size: 1.5em;
+}
+
+.task-remove {
+    grid-row: 1 / 2;
+    grid-column: 2 / 3;
+}
+
+.task-edit {
+    grid-row: 1 / 2;
+    grid-column: 3 / 4;
+}
+
+.task-done {
+    grid-row: 1 / 2;
+    grid-column: 4 / 5;
+}

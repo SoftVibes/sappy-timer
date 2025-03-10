@@ -1,0 +1,119 @@
+@import url('https://fonts.googleapis.com/css2?family=Pixelify+Sans:wght@400..700&display=swap');
+
+* {
+    border: 0;
+    padding: 0;
+    margin: 0;
+}
+
+#container {
+    position: fixed;
+    width: 100vw;
+    height: 100vh;
+    border-radius: 10px;
+    background-color: rgb(196, 127, 252);
+    color: white;
+    -webkit-user-select: none;
+    -webkit-app-region: drag;
+}
+
+#container * {
+    -webkit-user-select: text;
+    -webkit-app-region: no-drag;
+}
+
+#win-close {
+    position: fixed;
+    width: 30px;
+    height: 30px;
+    background-color: rgba(255, 239, 251, 0.15);
+    cursor: pointer;
+    outline: none;
+    margin-left: calc(100vw - 55px);
+    margin-right: 0;
+    margin-top: 7.5px;
+}
+
+#win-minimise {
+    position: fixed;
+    width: 30px;
+    height: 30px;
+    background-color: rgba(255, 239, 251, 0.15);
+    cursor: pointer;
+    outline: none;
+    margin-left: calc(100vw - 105px);
+    margin-right: 0;
+    margin-top: 8px;
+}
+
+#body {
+    position: fixed;
+    width: calc(100vw - 30px);
+    height: calc(100vh - 55px);
+    margin: 45px 15px 15px 15px;
+    border-radius: 15px;
+    background-color: rgb(255, 162, 218);
+    color: white;
+    -webkit-user-select: text;
+    -webkit-app-region: no-drag;
+}
+
+#body h1 {
+    display: block;
+    margin-inline: auto;
+    margin-top: 40px;
+    background: transparent;
+    color: white;
+    font-family: 'Pixelify Sans', serif;
+    font-size: 70px;
+    font-weight: 700;
+    text-align: center;
+    /*text-shadow: 0px 0px 10px rgb(90, 181, 255);*/
+    -webkit-text-stroke: 1.5px rgb(214, 104, 146);
+}
+
+#cat-img {
+    width: 256px;
+    height: 256px;
+    position: absolute;
+    margin-top: 0;
+    margin-bottom: 0;
+    margin-left: calc((100vw - 286px)/2);
+}
+
+#start-btn {
+    position: absolute;
+    width: 394px;
+    height: 170px;
+    margin-top: 216px;
+    margin-left: calc((100vw - 450px)/2);
+    padding: 0;
+    display: flex;
+    align-items: center;
+    background: transparent;
+    justify-content: center;
+    color: white;
+    cursor: pointer;
+}
+
+#start-box {
+    width: 394px;
+    height: 170px;
+    position: absolute;
+    margin-bottom: 0;
+    z-index: 0;
+}
+
+#start-text {
+    position: absolute;
+    width: 394px;
+    height: 170px;
+    margin-top: 0;
+    margin-bottom: 0;
+    font-family: 'Pixelify Sans', serif;
+    font-weight: 700;
+    font-size: 80px;
+    text-align: center;
+    line-height: 170px;
+    z-index: 1;
+}

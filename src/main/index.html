@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sappy Timer</title>
+    <link rel="stylesheet" href="style.css">
+    <script defer src="script.js"></script>
+</head>
+<body>
+    <div id="container">
+        <button id="win-close"><img src="../win_close_btn.png" alt="x" id="win-close-img"></button>
+        <button id="win-minimise"><img src="../win_minimise_btn.png" alt="-" id="win-minimise-img"></button>
+        <div id="body">
+            <img src="../cat2_idle.png" alt="" id="cat-img">
+            <div id="text-bubble">
+                <p id="text-bubble-text"></p>
+            </div>
+            <div id="timer-box">
+                <div class="timer-counter" id="timer-hours">
+                    <input type="number" value="0" class="counter-input-text" id="counter-hours" onkeyup="hourMinMax(this);">
+                    <button class="counter-input-button inc" id="counter-hours-inc" onclick="updateHour(1);">+</button>
+                    <button class="counter-input-button dec" id="counter-hours-dec" onclick="updateHour(-1);">-</button>
+                </div>
+                <div class="timer-counter" id="timer-minutes">
+                    <input type="number" value="0" class="counter-input-text" id="counter-minutes" onkeyup="minMinMax(this);">
+                    <button class="counter-input-button inc" id="counter-minutes-inc" onclick="updateMin(1);">+</button>
+                    <button class="counter-input-button dec" id="counter-minutes-dec" onclick="updateMin(-1)">-</button>
+                </div>
+                <div class="timer-counter" id="timer-seconds">
+                    <input type="number" value="0" class="counter-input-text" id="counter-seconds" onkeyup="secMinMax(this);">
+                    <button class="counter-input-button inc" id="counter-seconds-inc" onclick="updateSec(1)">+</button>
+                    <button class="counter-input-button dec" id="counter-seconds-dec" onclick="updateSec(-1)">-</button>
+                </div>
+                <div id="control-box">
+                    <button class="control" id="control-startstop" onclick="startstop();">►</button>
+                    <button class="control" id="control-reset" onclick="reset();">↺</button>
+                </div>
+            </div>
+        </div>
+        <div id="tasks">
+            <button id="add-task" onclick="addTask();">Add New Task +</button>
+        </div>
+    </div>
+</body>
+</html>

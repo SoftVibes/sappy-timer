@@ -1,0 +1,14 @@
+{
+  "name": "sappy-timer",
+  "version": "1.0.0",
+  "description": "Study Timer App",
+  "main": "index.js",
+  "scripts": {
+    "start": "electron ."
+  },
+  "author": "SoftVibes",
+  "license": "MIT",
+  "dependencies": {
+    "electron": "^34.0.2"
+  }
+}
