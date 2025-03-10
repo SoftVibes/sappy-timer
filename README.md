@@ -1,5 +1,7 @@
 # Sappy Timer
 
-## Cutesy sillys study timer app for my girlfriend
+## Cutesy silly study timer app for my girlfriend
+
+Whoa! Isn't this silly af!
 
 Made with ElectronJS
