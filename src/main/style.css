@@ -245,7 +245,19 @@
     border: 5px solid var(--darkviolet);
     border-radius: 5px;
     gap: 10px;
-    overflow-y: scroll;
+    overflow-y: auto;
+}
+
+#tasks::-webkit-scrollbar {
+    background-color: var(--pink);
+}
+
+#tasks::-webkit-scrollbar-thumb {
+    background-color: var(--violet);
+}
+
+#tasks::-webkit-scrollbar-thumb:hover {
+    background-color: var(--lightviolet);
 }
 
 #add-task {

@@ -189,10 +189,10 @@ function startstop () {
 
         //Display Text and Images
         document.getElementById('cat-img').src = '../cat2_open_mouth.png';
-        textBubble('Lets Go! You Can Do It!', 2000);
+        textBubble('Lets Go! You Can Do It!', 3000);
         setTimeout(() => {
             document.getElementById('cat-img').src = '../cat2_idle.png';
-        }, 2000);
+        }, 3000);
     }
 
     started = !started;    // Change Started to Stopped or Vice Versa
@@ -250,10 +250,10 @@ setInterval(() => {
         document.getElementById('cat-img').src = '../cat2_open_mouth.png';
         text = dialogues[Math.floor(Math.random() * dialogues.length)];
         document.getElementById('cat-img').src = '../cat2_open_mouth.png';
-        textBubble(text, 2500);
+        textBubble(text, 4500);
         setTimeout(() => {
             document.getElementById('cat-img').src = '../cat2_idle.png';
-        });
+        }, 4500);
     }
 }, 1000*60*5);
 
@@ -287,7 +287,7 @@ function addTask() {   // Create New Task
     newTaskBtnRemove.className = 'task-remove';
     newTaskBtnRemove.addEventListener('click', (e) => {    // Remove Task if Clicked
         e.target.parentElement.remove();
-        textBubble('It\'s Okay! You\'ll Finish Another Task Soon Enough', 1000);
+        textBubble('It\'s Okay! You\'ll Finish Another Task Soon Enough', 4000);
     });
 
     newTaskBtnEdit = document.createElement('button');    // Task Edit Button
@@ -315,15 +315,15 @@ function addTask() {   // Create New Task
         }, 500);
         setTimeout(() => {
             clearTimeout(t);
-        }, 3400);
+        }, 4500);
         document.getElementById('cat-img').src = '../cat2_open_mouth.png';
-        textBubble('Woohooo! You Did It! Yay! I\'m So Proud Of You!',3400)
+        textBubble('Woohooo! You Did It! Yay! I\'m So Proud Of You!', 4500)
         setTimeout(() => {
             document.getElementById('cat-img').src = '../cat2_smile.png';
-        }, 400);
+        }, 500);
         setTimeout(() => {
             document.getElementById('cat-img').src = '../cat2_idle.png';
-        }, 3000);
+        }, 4000);
     });
 
     addTaskBtn.insertAdjacentElement('afterend', newTask);    // Insert Task Just After Add Task Button
@@ -342,10 +342,10 @@ function addTask() {   // Create New Task
 
     // Display Images After Task is Added
     document.getElementById('cat-img').src = '../cat2_open_mouth.png';
-    textBubble('Another Task Already?! I\'m Impressed!', 2000);
+    textBubble('Another Task Already?! I\'m Impressed!', 4000);
     setTimeout(() => {
         document.getElementById('cat-img').src = '../cat2_idle.png';
-    }, 2000);
+    }, 4000);
 }
 
 function removeSelf(elem) {

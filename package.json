@@ -4,11 +4,28 @@
   "description": "Study Timer App",
   "main": "index.js",
   "scripts": {
-    "start": "electron ."
+    "start": "electron .",
+    "build": "electron-builder",
+    "dist": "electron-builder",
+    "dist:windows": "electron-builder --windows"
   },
-  "author": "SoftVibes",
+  "build": {
+    "appId": "com.softvibes.sappytimer",
+    "icon": "src/icon.ico",
+    "win": {
+      "target": ["nsis"]
+    },
+    "linux": {
+      "icon": "src/icon.png",
+      "target": ["AppImage", "deb"]
+    }
+  },
+  "author": "SoftVibes <chickenpakale@gmail.com>",
   "license": "MIT",
   "dependencies": {
-    "electron": "^34.0.2"
+  },
+  "devDependencies": {
+    "electron": "^34.0.2",
+    "electron-builder": "^25.1.8"
   }
 }
