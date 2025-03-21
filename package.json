@@ -1,16 +1,16 @@
 {
   "name": "sappy-timer",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "Study Timer App",
   "main": "index.js",
   "scripts": {
     "start": "electron .",
-    "build": "electron-builder",
     "dist": "electron-builder",
     "dist:windows": "electron-builder --windows"
   },
   "build": {
     "appId": "com.softvibes.sappytimer",
+    "productName": "Sappy Timer",
     "icon": "src/icon.ico",
     "win": {
       "target": ["nsis"]

@@ -262,10 +262,41 @@ setInterval(() => {
 
 function addTask() {   // Create New Task
     tasks = document.getElementById('tasks');
-    addTaskBtn = document.getElementById('add-task');
+    addBtns = document.getElementById('add-buttons');
 
     newTask = document.createElement('div');    // New Task Element
     newTask.className = 'task';
+    newTask.draggable = true;
+    newTask.addEventListener('dragstart', (e) => {      // Drag event for ever task element
+        let selected = e.target;
+
+        categories = document.getElementsByClassName('category');
+        for (let i = 0; i < categories.length; i++) {    // Set up drop on all existing categories
+            categories[i].addEventListener('dragover', (e) => {    // Prevent default dragover behaviour
+                e.preventDefault();
+            });
+
+            categories[i].addEventListener('drop', (e) => {    //  Move task once dropped
+                categories[i].appendChild(selected);
+                if (categories[i].getAttribute('state') == 'collapsed') {    // Hide task if category dropdown is collapsed
+                    selected.style.display = 'none';
+                }
+                selected = null;
+            });
+        }
+
+        // For dragging over tasks field, outside of any category's bounds
+        tasks = document.getElementById('tasks');
+        tasks.addEventListener('dragover', (e) => {
+            e.preventDefault();
+        });
+
+        tasks.addEventListener('drop', (e) => {
+            addBtns = document.getElementById('add-buttons');
+            addBtns.insertAdjacentElement('afterend', selected);
+            selected = null;
+        });
+    });
 
     newTaskName = document.createElement('input');    // Name of New Task Element
     newTaskName.className = 'task-name';
@@ -277,8 +308,8 @@ function addTask() {   // Create New Task
     newTaskName.addEventListener('blur', (e) => {    // Change to Uneditable if Clicked Outside
         e.target.disabled = true;
     });
-    newTaskName.addEventListener('keyup', (e) => {    // Change to Uneditable if Enter Pressed
-        if (e.keyCode == 13) {
+    newTaskName.addEventListener('keyup', (e) => {    // Change to Uneditable if Enter/Esc Pressed
+        if (e.keyCode == 13 || e.keyCode == 27) {
             e.target.disabled = true;
         }
     });
@@ -308,8 +339,17 @@ function addTask() {   // Create New Task
     newTaskBtnDone = document.createElement('button');    // Task Finish Button
     newTaskBtnDone.className = 'task-done';
     newTaskBtnDone.addEventListener('click', (e) => {    // Remove Task and Display Imaged if Clicked
-
+        
+        cat = e.target.parentElement.parentElement;
         e.target.parentElement.remove();
+
+        if (cat.className == 'category' && cat.children.length == 3) {    // If parent of entire task element is a category and task is the last element of it, display different text
+            te = "Woohooo! You Did It! Yay! A whole category of tasks completed! You're Awesome!";
+            cat.remove();
+        } else {    // Otherwise display standard text
+             te = "Woohooo! You Did It! Yay! I\'m So Proud Of You!";
+        }
+
         t = setInterval(() => {
             yaySound.play();
         }, 500);
@@ -317,7 +357,7 @@ function addTask() {   // Create New Task
             clearTimeout(t);
         }, 4500);
         document.getElementById('cat-img').src = '../cat2_open_mouth.png';
-        textBubble('Woohooo! You Did It! Yay! I\'m So Proud Of You!', 4500)
+        textBubble(te, 4500);
         setTimeout(() => {
             document.getElementById('cat-img').src = '../cat2_smile.png';
         }, 500);
@@ -326,7 +366,7 @@ function addTask() {   // Create New Task
         }, 4000);
     });
 
-    addTaskBtn.insertAdjacentElement('afterend', newTask);    // Insert Task Just After Add Task Button
+    addBtns.insertAdjacentElement('afterend', newTask);    // Insert Task Just After Add Buttons
 
     // Insert Name and Buttons
     newTask.appendChild(newTaskName);
@@ -348,22 +388,82 @@ function addTask() {   // Create New Task
     }, 4000);
 }
 
-function removeSelf(elem) {
-    elem.parentElement.remove();
+
+// CODE FOR CATEGORIES FUNCTIONALITY
+
+function addCategory() {
+    tasks = document.getElementById('tasks');    // New Category element
+    addBtns = document.getElementById('add-buttons');
+
+    newCategory = document.createElement('div');
+    newCategory.className = 'category';
+    newCategory.setAttribute('state', 'dropped');    // Set state for dropped/collapsed
+
+    newCategoryDropdownBtn = document.createElement('button');    // Dropdown/Collapse button, default state is dropped
+    newCategoryDropdownBtn.className = 'category-dropdown-btn';
+    newCategoryDropdownBtn.innerHTML = '▼';
+    newCategoryDropdownBtn.addEventListener('click', (e) => {    // Drop/Collapse on click
+        elem = e.target.parentElement;
+        if (elem.getAttribute('state') == "dropped") {
+            c = elem.children;
+            for (let i = 3; i < c.length; i++) {    // Hide children task elements if collapsed
+                c[i].style.display = 'none';
+            }
+            elem.setAttribute('state', "collapsed");    // Switch state from dropped to collapsed
+            c[0].innerHTML = '▲';
+        } else {
+            c = elem.children;
+            for (let i = 3; i < c.length; i++) {
+                c[i].style.display = '';    // Show all children task elements when dropped. Display block pushes elements outside grid so default value of display is used
+            }
+            elem.setAttribute('state', "dropped");    // Switch state from collapsed to dropped
+            c[0].innerHTML = '▼';
+        }
+    });
+
+    newCategoryRemoveBtn = document.createElement('button');    // Category remove button
+    newCategoryRemoveBtn.className = 'category-remove-btn';
+    newCategoryRemoveBtn.innerHTML = '❌';
+    newCategoryRemoveBtn.addEventListener('click', (e) => {
+        addBtns = document.getElementById('add-buttons');
+        c = e.target.parentElement.children;
+        while (c.length > 3) {    // Moves all existing children task elements outside so that they are not destroyed
+            c[3].style.display = '';    // Sets their display to default in case category is collapsed, in which case display=none elements will be moved outside with the display stuck on none value
+            addBtns.insertAdjacentElement('afterend', c[3]);
+        }
+        e.target.parentElement.remove();    // Remove entire category along with category name and buttons
+    });
+
+
+    newCategoryName = document.createElement('input');    // Category name input field (no disabling input field for categories like tasks)
+    newCategoryName.type = 'input';
+    newCategoryName.className = 'category-name';
+    newCategoryName.spellcheck = false;
+    newCategoryName.value = "";
+    newCategoryName.placeholder = "Enter Category Name";
+    newCategoryName.addEventListener('keyup', (e) => {    // Unfocus if Enter/Esc Pressed
+        if (e.keyCode == 13 || e.keyCode == 27) {
+            e.target.blur();
+        }
+    });
+    
+    // Append all elements
+    addBtns.insertAdjacentElement('afterend', newCategory);
+    newCategory.appendChild(newCategoryDropdownBtn);
+    newCategory.appendChild(newCategoryName);
+    newCategory.appendChild(newCategoryRemoveBtn);
+
+    newCategoryName.focus();    // Focus right after appended
 }
-
-
 
 // TEXT BUBBLE
 
 function textBubble(text, duration) {
-    console.log('Called')
     document.getElementById('text-bubble-text').innerHTML = text;
     document.getElementById('text-bubble').style.display = 'block';
 
     setTimeout(() => {
         document.getElementById('text-bubble-text').innerHTML = '';
         document.getElementById('text-bubble').style.display = 'none';
-        console.log('Finished')
     }, duration);
 }
